@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace chessProgram.Pieces
 {
-    class Piece
+    abstract class Piece
     {
+        protected char letterDisplay;
+        protected col color;
+        protected bool hasBeenMoved = false;
+
+        public Piece(col color)
+        {
+            this.color = color;
+        }
+
+        public void drawLetterDisplay()
+        {
+            Console.Write(" " + letterDisplay + " ");
+        }
+
+        abstract public bool movementLegal(int dx, int dy);
     }
 }

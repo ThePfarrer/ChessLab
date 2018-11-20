@@ -6,7 +6,25 @@ using System.Threading.Tasks;
 
 namespace chessProgram.Pieces
 {
-    class Pawn
+    class Pawn : Piece
     {
+        public Pawn(col color) : base(color)
+        {
+            letterDisplay = 'P';
+        }
+
+        public override bool movementLegal(int dx, int dy)
+        {
+            int Direction;
+            if (color == col.White)
+            {
+                Direction = 1;
+            } else
+            {
+                Direction = -1;
+            }
+
+            if ()
+        }
     }
 }
