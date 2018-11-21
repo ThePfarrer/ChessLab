@@ -9,11 +9,12 @@ namespace chessProgram
 {
     class Field
     {
-        Piece piece;
+        public Piece piece;
+        //public col col;
 
         public Field(col col)
         {
-
+            
         }
 
         public void drawChessField()
@@ -21,6 +22,7 @@ namespace chessProgram
             if (piece != null)
             {
                 piece.drawLetterDisplay();
+                
             } else
             {
                 Console.Write("   ");

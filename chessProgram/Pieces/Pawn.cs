@@ -24,7 +24,7 @@ namespace chessProgram.Pieces
                 Direction = -1;
             }
 
-            if ()
+            return true;
         }
     }
 }

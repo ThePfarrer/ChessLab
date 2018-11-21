@@ -22,6 +22,9 @@ namespace chessProgram.Pieces
             Console.Write(" " + letterDisplay + " ");
         }
 
+        public col GetCol() { return color; }
+
+
         abstract public bool movementLegal(int dx, int dy);
     }
 }
