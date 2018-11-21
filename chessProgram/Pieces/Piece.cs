@@ -19,7 +19,18 @@ namespace chessProgram.Pieces
 
         public void drawLetterDisplay()
         {
-            Console.Write(" " + letterDisplay + " ");
+            if (color == col.Black)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(" " + letterDisplay + " ");
+                Console.ForegroundColor = ConsoleColor.White;
+            } else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(" " + letterDisplay + " ");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            
         }
 
         public col GetCol() { return color; }

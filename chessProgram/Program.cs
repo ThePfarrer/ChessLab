@@ -11,8 +11,15 @@ namespace chessProgram
         static void Main(string[] args)
         {
             Board board = new Board();
-
             board.drawChessBoard();
+
+            int x1 = Int32.Parse(Console.ReadLine());
+            int y1 = Int32.Parse(Console.ReadLine());
+            int x2 = Int32.Parse(Console.ReadLine());
+            int y2 = Int32.Parse(Console.ReadLine());
+            
+
+            TestMovement(board, x1, y1, x2, y2);
             Console.ReadKey();
         }
 

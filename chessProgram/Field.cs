@@ -10,23 +10,41 @@ namespace chessProgram
     class Field
     {
         public Piece piece;
-        //public col col;
+        public col col;
 
         public Field(col col)
         {
-            
+            this.col = col;
         }
 
         public void drawChessField()
         {
-            if (piece != null)
+            if (col == col.White)
             {
-                piece.drawLetterDisplay();
-                
+                Console.BackgroundColor = ConsoleColor.Gray;
+                if (piece != null)
+                {
+                    piece.drawLetterDisplay();
+
+                }
+                else
+                {
+                    Console.Write("   ");
+                }
+                Console.BackgroundColor = ConsoleColor.Black;
             } else
             {
-                Console.Write("   ");
+                if (piece != null)
+                {
+                    piece.drawLetterDisplay();
+
+                }
+                else
+                {
+                    Console.Write("   ");
+                }
             }
+            
         }
     }
 }
