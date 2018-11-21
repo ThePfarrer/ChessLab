@@ -15,16 +15,24 @@ namespace chessProgram.Pieces
 
         public override bool movementLegal(int dx, int dy)
         {
-            int Direction;
+            int Direction,  Y;
+           
+            Y = Math.Abs(dy);
             if (color == col.White)
             {
-                Direction = 1;
+                Direction = -1;
             } else
             {
-                Direction = -1;
+                Direction = 1;
             }
 
-            return true;
+            if ((!hasBeenMoved && dx == (Direction * 2) || dx == Direction ) && (dy == 0) || 
+                (dx == Direction && Y == 1))
+            {
+                hasBeenMoved = true;
+                return true;
+            }
+            return false;
         }
     }
 }

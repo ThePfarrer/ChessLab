@@ -99,15 +99,22 @@ namespace chessProgram
             {
                 return MovementResult.TargetOutsideBoard;
             }
-            if (field[x1, y1].piece == null)
+            if ((x1 > 7 || x1 < 0 || y1 < 0 || y1 > 7) ||
+                field[x1, y1].piece == null)
             {
                 return MovementResult.NoPieceOnSource;
             }
-            if (field[x1, y1].piece.GetCol() == field[x2, y2].piece.GetCol())
+            if (field[x2, y2].piece != null && 
+                field[x1, y1].piece.GetCol() == field[x2, y2].piece.GetCol()  )
             {
                 return MovementResult.TargetOccupiedByOwnPiece;
             }
-            //if (!(field[x1,y1].piece.GetType() == typeof(Knight)))
+            if (field[x1, y1].piece.movementLegal((x2 - x1), (y2 - y1)))
+            {
+                field[x2, y2].piece = field[x1, y1].piece;
+                field[x1, y1].piece = null;
+                return MovementResult.LegalMove;
+            }
             return MovementResult.IllegalMovement;
         }
     }
