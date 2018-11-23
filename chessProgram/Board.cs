@@ -78,18 +78,14 @@ namespace chessProgram
                 {
                     field[i, j].drawChessField();
                     Console.Write(verticalLine);
-
                 }
                 if (i != 7)
                 {
                     Console.WriteLine("\n" + inBetween);
                 }
-
-
             }
 
             Console.WriteLine("\n" + bottomLine);
-
 
         }
 
@@ -104,16 +100,96 @@ namespace chessProgram
             {
                 return MovementResult.NoPieceOnSource;
             }
-            if (field[x2, y2].piece != null && 
-                field[x1, y1].piece.GetCol() == field[x2, y2].piece.GetCol()  )
+            if (field[x2, y2].piece != null &&
+                field[x1, y1].piece.GetCol() == field[x2, y2].piece.GetCol())
             {
                 return MovementResult.TargetOccupiedByOwnPiece;
             }
             if (field[x1, y1].piece.movementLegal((x2 - x1), (y2 - y1)))
             {
-                field[x2, y2].piece = field[x1, y1].piece;
-                field[x1, y1].piece = null;
-                return MovementResult.LegalMove;
+                // The Knight is allowed to jump over any piece
+                if (field[x1, y1].piece.GetType() != typeof(Knight))
+                {
+                    int X = Math.Abs(x1 - x2);
+                    int Y = Math.Abs(y1 - y2);
+
+                    // Checks for collision if dx or dy is greater than 1
+                    if (!(Math.Max(X, Y) == 1))
+                    {
+                        int X1, X2, Y1, Y2, counter; // temp variables
+                        counter = 1;
+                        X1 = x1;
+                        Y1 = y1;
+                        X2 = x2;
+                        Y2 = y2;
+
+                        while (counter < Math.Max(X, Y))
+                        {
+                            if (X1 > X2)
+                            {
+                                X1--;
+                            }
+                            else if (X1 == X2)
+                            {
+                                X1 += 0;
+                            }
+                            else
+                            {
+                                X1++;
+                            }
+
+                            if (Y1 > Y2)
+                            {
+                                Y1--;
+                            }
+                            else if (Y1 == Y2)
+                            {
+                                Y1 += 0;
+                            }
+                            else
+                            {
+                                Y1++;
+                            }
+
+                            if (field[X1, Y1].piece != null)
+                            {
+                                return MovementResult.Collision;
+                            }
+                            counter++;
+                        }
+                    }
+
+                    //The Pawn movement isn't straightforward
+                    if (field[x1, y1].piece.GetType() != typeof(Pawn))
+                    {
+                        field[x2, y2].piece = field[x1, y1].piece;
+                        field[x1, y1].piece = null;
+                        return MovementResult.LegalMove;
+                    }
+                    else
+                    {
+                        if (Math.Abs(y1 - y2) == 1 && field[x2, y2].piece != null)
+                        {
+                            field[x2, y2].piece = field[x1, y1].piece;
+                            field[x2, y2].piece.setHasBeenMoved();
+                            field[x1, y1].piece = null;
+                            return MovementResult.Hit;
+                        }
+                        if (Math.Abs(y1 - y2) == 0 && field[x2, y2].piece == null)
+                        {
+                            field[x2, y2].piece = field[x1, y1].piece;
+                            field[x2, y2].piece.setHasBeenMoved();
+                            field[x1, y1].piece = null;
+                            return MovementResult.LegalMove;
+                        }
+                    }
+                }
+                else
+                {
+                    field[x2, y2].piece = field[x1, y1].piece;
+                    field[x1, y1].piece = null;
+                    return MovementResult.LegalMove;
+                }
             }
             return MovementResult.IllegalMovement;
         }

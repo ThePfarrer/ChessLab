@@ -17,6 +17,8 @@ namespace chessProgram.Pieces
             this.color = color;
         }
 
+        public void setHasBeenMoved() { hasBeenMoved = true; }
+
         public void drawLetterDisplay()
         {
             if (color == col.Black)

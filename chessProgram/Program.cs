@@ -11,6 +11,7 @@ namespace chessProgram
     {
         static void Main(string[] args)
         {
+            //Console.WriteLine(Math.Max(10, 10));
             Board board = new Board();
             //Piece piece;
             board.drawChessBoard();

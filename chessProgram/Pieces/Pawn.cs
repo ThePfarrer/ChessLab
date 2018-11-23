@@ -29,7 +29,7 @@ namespace chessProgram.Pieces
             if ((!hasBeenMoved && dx == (Direction * 2) || dx == Direction ) && (dy == 0) || 
                 (dx == Direction && Y == 1))
             {
-                hasBeenMoved = true;
+                //hasBeenMoved = true;
                 return true;
             }
             return false;
