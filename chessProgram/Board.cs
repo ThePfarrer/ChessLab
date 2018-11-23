@@ -11,6 +11,7 @@ namespace chessProgram
     {
         Field[,] field = new Field[8, 8];
 
+
         public Board()
         {
             for (int i = 0; i < 8; i++)
@@ -192,6 +193,11 @@ namespace chessProgram
                 }
             }
             return MovementResult.IllegalMovement;
+        }
+
+        public Field GetPiece(int x1, int y1)
+        {
+            return field[x1, y1];
         }
     }
 }
